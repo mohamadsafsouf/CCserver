@@ -2,12 +2,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "KeyGeneratorCC",
+    name: "KeyCC",
     platforms: [
         .macOS(.v13)
     ],
     products: [
-        .executable(name: "KeyGeneratorCC", targets: ["KeyGeneratorCC"])
+        .executable(name: "KeyCC", targets: ["KeyCC"])
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", from: "4.110.1"),
@@ -15,16 +15,15 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "KeyGeneratorCC",
+            name: "KeyCC",
             dependencies: [
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "Crypto", package: "swift-crypto")
             ]
         ),
         .testTarget(
-            name: "KeyGeneratorCCTests",
-            dependencies: ["KeyGeneratorCC"]
+            name: "KeyCCTests",
+            dependencies: ["KeyCC"]
         )
     ]
 )
-
