@@ -1,38 +1,30 @@
-// swift-tools-version:6.0
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
-    name: "KeyCC",
+    name: "KeyGeneratorCC",
     platforms: [
-       .macOS(.v13)
+        .macOS(.v13)
+    ],
+    products: [
+        .executable(name: "KeyGeneratorCC", targets: ["KeyGeneratorCC"])
     ],
     dependencies: [
-        // 💧 A server-side Swift web framework.
         .package(url: "https://github.com/vapor/vapor.git", from: "4.110.1"),
-        // 🔵 Non-blocking, event-driven networking for Swift. Used for custom executors
-        .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
+        .package(url: "https://github.com/apple/swift-crypto.git", from: "2.0.0")
     ],
     targets: [
         .executableTarget(
-            name: "KeyCC",
+            name: "KeyGeneratorCC",
             dependencies: [
                 .product(name: "Vapor", package: "vapor"),
-                .product(name: "NIOCore", package: "swift-nio"),
-                .product(name: "NIOPosix", package: "swift-nio"),
-            ],
-            swiftSettings: swiftSettings
+                .product(name: "Crypto", package: "swift-crypto")
+            ]
         ),
         .testTarget(
-            name: "KeyCCTests",
-            dependencies: [
-                .target(name: "KeyCC"),
-                .product(name: "VaporTesting", package: "vapor"),
-            ],
-            swiftSettings: swiftSettings
+            name: "KeyGeneratorCCTests",
+            dependencies: ["KeyGeneratorCC"]
         )
     ]
 )
 
-var swiftSettings: [SwiftSetting] { [
-    .enableUpcomingFeature("ExistentialAny"),
-] }

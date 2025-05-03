@@ -1,5 +1,5 @@
 import Vapor
-import CryptoKit
+import Crypto
 func routes(_ app: Application) throws {
     app.get { req async in
         "It works!"
